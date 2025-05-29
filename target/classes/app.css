@@ -1,0 +1,19 @@
+/* app.css */
+
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.tab-pane .tab-header-area {
+    -fx-background-color: #ECECEC;
+}
+
+.button {
+    -fx-background-color: #2C3E50;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.label {
+    -fx-text-fill: #333333;
+}

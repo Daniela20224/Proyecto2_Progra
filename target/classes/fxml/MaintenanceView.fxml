@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="GUI.MaintenanceController">
+  <top>
+    <HBox spacing="10">
+      <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+      </padding>
+      <Label text="Entidad:"/>
+      <ComboBox fx:id="entitySelector" promptText="Seleccione..."/>
+      <Button text="Cargar" onAction="#onLoadEntity"/>
+    </HBox>
+  </top>
+  
+  <center>
+    <TableView fx:id="table" prefHeight="400" prefWidth="600">
+      <!-- Las columnas se configurarán dinámicamente en el controlador -->
+    </TableView>
+  </center>
+  
+  <bottom>
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+      <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+      </padding>
+      <Button text="Nuevo" onAction="#onNew"/>
+      <Button text="Editar" onAction="#onEdit"/>
+      <Button text="Eliminar" onAction="#onDelete"/>
+    </HBox>
+  </bottom>
+</BorderPane>

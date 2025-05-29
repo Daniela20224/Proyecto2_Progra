@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <persistence-unit name="com.mycompany_Proyecto2_Progra_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>models.MahnPrecios</class>
+    <class>models.MahnColeccion</class>
+    <class>models.MahnComisionTarjeta</class>
+    <class>models.MahnValoracionSala</class>
+    <class>models.MahnEntrada</class>
+    <class>models.MahnMuseo</class>
+    <class>models.MahnEspecie</class>
+    <class>models.MahnSala</class>
+    <class>models.MahnEntradaSala</class>
+    <class>models.MahnTematica</class>
+    <class>models.MahnVisitante</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:FREE"/>
+      <property name="javax.persistence.jdbc.user" value="AMUSEO"/>
+      <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+      <property name="javax.persistence.jdbc.password" value="ALISON"/>
+    </properties>
+  </persistence-unit>
+</persistence>

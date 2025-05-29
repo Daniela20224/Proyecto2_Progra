@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+
+<TabPane xmlns:fx="http://javafx.com/fxml">
+  <tabs>
+    <Tab text="Mantenimientos">
+      <fx:include source="MaintenanceView.fxml"/>
+    </Tab>
+    <Tab text="Venta de Entradas">
+      <fx:include source="TicketSaleView.fxml"/>
+    </Tab>
+    <Tab text="Validación QR">
+      <fx:include source="QRValidationView.fxml"/>
+    </Tab>
+    <Tab text="Valoración">
+      <fx:include source="RatingView.fxml"/>
+    </Tab>
+  </tabs>
+</TabPane>

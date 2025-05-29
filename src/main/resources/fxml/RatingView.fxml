@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="GUI.RatingController"
+      spacing="10">
+  <padding>
+    <Insets top="20" right="20" bottom="20" left="20"/>
+  </padding>
+
+  <Label text="Valorar Sala" style="-fx-font-size: 18px;"/>
+  
+  <GridPane hgap="10" vgap="10">
+    <Label text="Sala:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="salaBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+    
+    <Label text="Estrellas (1–5):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <Spinner fx:id="starsSpinner" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+    
+    <Label text="Observación:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextArea fx:id="obsArea" prefRowCount="3" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+  </GridPane>
+  
+  <Button text="Enviar Valoración" onAction="#onSubmit"/>
+  <Label fx:id="statusLabel" style="-fx-font-size: 14px;"/>
+</VBox>

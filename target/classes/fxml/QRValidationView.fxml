@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="GUI.QRValidationController"
+      spacing="15">
+  <padding>
+    <Insets top="20" right="20" bottom="20" left="20"/>
+  </padding>
+
+  <Label text="Validar Código QR" style="-fx-font-size: 18px;"/>
+  <TextField fx:id="qrCodeField" promptText="Pegue aquí el texto del QR"/>
+  <Button text="Validar" onAction="#onValidate"/>
+  <Label fx:id="resultLabel" style="-fx-font-size: 14px;"/>
+</VBox>

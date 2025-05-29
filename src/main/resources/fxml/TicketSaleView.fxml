@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="GUI.TicketSaleController"
+      spacing="10">
+  <padding>
+    <Insets top="20" right="20" bottom="20" left="20"/>
+  </padding>
+
+  <Label text="Venta de Entradas" style="-fx-font-size: 18px;"/>
+
+  <GridPane hgap="10" vgap="10">
+    <Label text="Visitante ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="visitanteIdField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+    <Label text="Tipo Tarjeta:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <ComboBox fx:id="cardTypeBox" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Label text="Últimos Dígitos:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="cardDigitsField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Precio Unitario:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <Label fx:id="unitPriceLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <Label text="Cantidad:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+    <Spinner fx:id="quantitySpinner" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+  </GridPane>
+
+  <HBox spacing="10" alignment="CENTER_RIGHT">
+    <Button text="Calcular Total" onAction="#onCalculate"/>
+    <Button text="Vender" onAction="#onSell"/>
+  </HBox>
+
+
+  <Label fx:id="totalLabel"
+         style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+  <Label fx:id="totalLabel"
+         style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+</VBox>
