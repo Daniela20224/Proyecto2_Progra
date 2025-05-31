@@ -4,17 +4,15 @@
  */
 package dao;
 
-import models.MahnMuseo;
-
+import models.MahnAreas;
 /**
  *
  * @author Alison Espinoza
  */
-public class MahnMuseoDAO extends GenericDAOImpl<MahnMuseo, Integer>{
+public class MahnAreasDAO extends GenericDAOImpl<MahnAreas, Integer>{
     
-    public MahnMuseoDAO(){
-    super(MahnMuseo.class);
-    } 
+    public MahnAreasDAO(){
+    super(MahnAreas.class);
+    
+    }
 }
-
-

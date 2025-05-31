@@ -7,8 +7,7 @@ package GUI;
 /**
  *
  * @author Alison Espinoza
- */
-import dao.*;
+ */import dao.*;
 import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

@@ -13,6 +13,8 @@
     <class>models.MahnEntradaSala</class>
     <class>models.MahnTematica</class>
     <class>models.MahnVisitante</class>
+    <class>models.MahnMuseos</class>
+    <class>models.MahnAreas</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:FREE"/>
       <property name="javax.persistence.jdbc.user" value="AMUSEO"/>

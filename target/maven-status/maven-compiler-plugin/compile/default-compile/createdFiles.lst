@@ -6,6 +6,7 @@ dao\MahnColeccionDAO.class
 Services\QRService.class
 dao\MahnTematicaDAO.class
 models\MahnMuseo.class
+models\MahnMuseos.class
 models\MahnVisitante.class
 dao\MahnPreciosDAO.class
 models\MahnValoracionSala.class
@@ -32,4 +33,5 @@ dao\MahnVisitanteDAO.class
 models\MahnEntradaSala.class
 models\MahnComisionTarjeta.class
 GUI\MaintenanceController.class
+models\MahnAreas.class
 com\mycompany\proyecto2_progra\App.class

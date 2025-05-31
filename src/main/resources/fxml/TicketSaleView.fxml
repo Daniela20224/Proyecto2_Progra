@@ -34,9 +34,6 @@
     <Button text="Vender" onAction="#onSell"/>
   </HBox>
 
-
-  <Label fx:id="totalLabel"
-         style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
   <Label fx:id="totalLabel"
          style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
 </VBox>
