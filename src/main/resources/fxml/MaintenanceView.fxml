@@ -1,34 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="GUI.MaintenanceController">
-  <top>
-    <HBox spacing="10">
-      <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-      </padding>
-      <Label text="Entidad:"/>
-      <ComboBox fx:id="entitySelector" promptText="Seleccione..."/>
-      <Button text="Cargar" onAction="#onLoadEntity"/>
-    </HBox>
-  </top>
-  
-  <center>
-    <TableView fx:id="table" prefHeight="400" prefWidth="600">
-      <!-- Las columnas se configurarán dinámicamente en el controlador -->
-    </TableView>
-  </center>
-  
-  <bottom>
-    <HBox spacing="10" alignment="CENTER_RIGHT">
-      <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-      </padding>
-      <Button text="Nuevo" onAction="#onNew"/>
-      <Button text="Editar" onAction="#onEdit"/>
-      <Button text="Eliminar" onAction="#onDelete"/>
-    </HBox>
-  </bottom>
+
+    <!-- Barra lateral estilo menú -->
+    <left>
+        <VBox spacing="10" prefWidth="180" style="-fx-background-color: #eeeeee;">
+            <padding>
+                <Insets top="20" left="10" right="10" bottom="20"/>
+            </padding>
+            <ImageView fitWidth="150" fitHeight="100" preserveRatio="true"/>
+            <Label text="SALA" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+
+            <Separator/>
+
+            <Label text="MANTENIMIENTOS" style="-fx-font-weight: bold;"/>
+            <Button text="Salas" onAction="#onMenuSala" maxWidth="Infinity"/>
+            <Button text="Colecciones" onAction="#onMenuColeccion" maxWidth="Infinity"/>
+            <Button text="Especies" onAction="#onMenuEspecie" maxWidth="Infinity"/>
+            <Button text="Temáticas" onAction="#onMenuTematica" maxWidth="Infinity"/>
+            <Button text="Precios" onAction="#onMenuPrecio" maxWidth="Infinity"/>
+            <Button text="Comisiones" onAction="#onMenuComision" maxWidth="Infinity"/>
+
+<!--            <Separator/>-->
+<!--
+            <Button text="ENTRADAS" onAction="#onMenuEntrada" maxWidth="Infinity"/>
+            <Button text="VALORACIÓN" onAction="#onMenuValoracion" maxWidth="Infinity"/>
+            <Button text="REPORTES" onAction="#onMenuReporte" maxWidth="Infinity"/>-->
+        </VBox>
+    </left>
+
+    <!-- Parte central con filtros y tabla -->
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" left="25" right="25" bottom="20"/>
+            </padding>
+
+            <!-- Título -->
+            <Label text="MANTENIMIENTOS" style="-fx-font-size: 20px; -fx-font-weight: bold;" maxWidth="Infinity">
+                <VBox.margin>
+                    <Insets bottom="10"/>
+                </VBox.margin>
+            </Label>
+
+            <!-- Filtros -->
+            <HBox spacing="10">
+                <Label text="Filtro 1:"/>
+                <TextField fx:id="filterText" promptText="Buscar..."/>
+                <Label text="Filtro 2:"/>
+                <ComboBox fx:id="advancedFilter" promptText="Seleccione"/>
+                <Button text="FILTRAR" onAction="#onApplyFilters"/>
+            </HBox>
+
+            <!-- Tabla de datos -->
+            <TableView fx:id="table" VBox.vgrow="ALWAYS">
+                <!-- Columnas dinámicas -->
+            </TableView>
+
+            <!-- Botones de acción CRUD -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="ELIMINAR" onAction="#onDelete"/>
+                <Button text="EDITAR" onAction="#onEdit"/>
+                <Button text="INSERTAR" onAction="#onNew"/>
+            </HBox>
+        </VBox>
+    </center>
+
 </BorderPane>

@@ -152,7 +152,7 @@ public class MahnMuseos implements Serializable {
 
     @Override
     public String toString() {
-        return "models.MahnMuseos[ idMuseo=" + idMuseo + " ]";
+        return "Museo{" + idMuseo +  "}: "+ nombre ;
     }
     
 }

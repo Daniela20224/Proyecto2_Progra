@@ -54,6 +54,7 @@ public class GenericDAOImpl<T, ID extends Serializable>
     @Override
     public List<T> findAll() {
         String q = "SELECT e FROM " + entityClass.getSimpleName() + " e";
+        System.out.println(q);
         return em.createQuery(q, entityClass).getResultList();
     }
 }

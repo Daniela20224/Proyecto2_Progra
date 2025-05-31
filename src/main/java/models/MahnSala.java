@@ -6,6 +6,9 @@ package models;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
@@ -13,17 +16,21 @@ import java.util.Collection;
  */
 @javax.persistence.Entity
 @javax.persistence.Table(name = "MAHN_SALA")
+@SequenceGenerator(name = "sala_seq", sequenceName = "SEQ_MAHN_SALA", allocationSize = 1)
 @javax.persistence.NamedQueries({
     @javax.persistence.NamedQuery(name = "MahnSala.findAll", query = "SELECT m FROM MahnSala m"),
     @javax.persistence.NamedQuery(name = "MahnSala.findByIdSala", query = "SELECT m FROM MahnSala m WHERE m.idSala = :idSala"),
     @javax.persistence.NamedQuery(name = "MahnSala.findByNombre", query = "SELECT m FROM MahnSala m WHERE m.nombre = :nombre"),
     @javax.persistence.NamedQuery(name = "MahnSala.findByDescripcion", query = "SELECT m FROM MahnSala m WHERE m.descripcion = :descripcion")})
 public class MahnSala implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+//
+//    private static final long serialVersionUID = 1L;
+    
+    @javax.persistence.Column(name = "NOMBREMUSEO")
+    private String nombreMuseo="sin asignar";
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sala_seq")
     @javax.persistence.Basic(optional = false)
     @javax.persistence.Column(name = "ID_SALA")
     private Integer idSala;
@@ -40,7 +47,7 @@ public class MahnSala implements Serializable {
     private Collection<MahnPrecios> mahnPreciosCollection;
     @javax.persistence.JoinColumn(name = "ID_MUSEO", referencedColumnName = "ID_MUSEO")
     @javax.persistence.ManyToOne(optional = false)
-    private MahnMuseo idMuseo;
+    private MahnMuseos idMuseo;
     @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "idSala")
     private Collection<MahnValoracionSala> mahnValoracionSalaCollection;
     @javax.persistence.OneToMany(cascade = javax.persistence.CascadeType.ALL, mappedBy = "idSala")
@@ -106,12 +113,23 @@ public class MahnSala implements Serializable {
         this.mahnPreciosCollection = mahnPreciosCollection;
     }
 
-    public MahnMuseo getIdMuseo() {
+    public MahnMuseos getIdMuseos() {
         return idMuseo;
     }
 
-    public void setIdMuseo(MahnMuseo idMuseo) {
+    public void setIdMuseos(MahnMuseos idMuseo) {
         this.idMuseo = idMuseo;
+       // this.nombreMuseo = (idMuseo != null && idMuseo.getNombre() != null) ? idMuseo.getNombre() : "Sin museo";
+       
+       this.nombreMuseo = idMuseo.getNombre();
+    }
+
+    public String getNombreMuseo() {
+        return nombreMuseo;
+    }
+
+    public void setNombreMuseo(String nombreMuseo) {
+        this.nombreMuseo = nombreMuseo;
     }
 
     public Collection<MahnValoracionSala> getMahnValoracionSalaCollection() {
@@ -154,5 +172,5 @@ public class MahnSala implements Serializable {
     public String toString() {
         return "models.MahnSala[ idSala=" + idSala + " ]";
     }
-    
+
 }

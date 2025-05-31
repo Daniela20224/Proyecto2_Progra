@@ -1,72 +1,169 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI;
 
-/**
- *
- * @author Alison Espinoza
- */import dao.*;
-import javafx.collections.*;
+import dao.*;
+import java.lang.reflect.Field;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import models.*;
 
-import java.io.IOException;
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MaintenanceController {
-    @FXML private ComboBox<String> entitySelector;
+
+    // Componentes de UI
     @FXML private TableView<Object> table;
-    
-    // DAOs disponibles
-    private final MahnColeccionDAO coleccionDAO = new MahnColeccionDAO();
-    private final MahnSalaDAO salaDAO           = new MahnSalaDAO();
-    // ... inyecta aquí el resto de DAOs
-    
+    @FXML private TextField filterText;
+    @FXML private ComboBox<String> advancedFilter;
+
+    // Selector interno de entidad (no visible en FXML)
+    private String selectedEntity;
+
+    // Mapas de entidades
+    private final Map<String, GenericDAO<?, ?>> daoMap = new HashMap<>();
+    private final Map<String, Class<?>> entityClassMap = new HashMap<>();
+
     @FXML
     public void initialize() {
-        entitySelector.getItems().addAll(
-            "Colección", "Sala", "Especie", "Visitante", "Temática", "Precios", "Valoración", "Entrada", "ComisiónTarjeta"
-        );
-    }
-    
-    @FXML
-    private void onLoadEntity() {
-        String ent = entitySelector.getValue();
-        table.getColumns().clear();
-        table.getItems().clear();
-        
-        switch (ent) {
-            case "Colección":
-                setupColumns(MahnColeccion.class);
-                loadData(coleccionDAO.findAll());
-                break;
-            case "Sala":
-                setupColumns(MahnSala.class);
-                loadData(salaDAO.findAll());
-                break;
-            // añade cada entidad...
-        }
-    }
-    
-    private <T> void setupColumns(Class<T> clazz) {
-        // Reflexión: crear TableColumn por cada getter de la entidad
-        // (implementar según tu convención de nombres)
-    }
-    
-    private <T> void loadData(List<T> data) {
-        ObservableList<Object> items = FXCollections.observableArrayList(data);
-        table.setItems(items);
+        // Inicializar DAO y clases
+        daoMap.put("Museo", new MahnMuseosDAO());
+        daoMap.put("Sala", new MahnSalaDAO());
+        daoMap.put("Colección", new MahnColeccionDAO());
+        daoMap.put("Especie", new MahnEspecieDAO());
+        daoMap.put("Visitante", new MahnVisitanteDAO());
+        daoMap.put("Temática", new MahnTematicaDAO());
+        daoMap.put("Precios", new MahnPreciosDAO());
+        daoMap.put("ComisiónTarjeta", new MahnComisionTarjetaDAO());
+        daoMap.put("Entrada", new MahnEntradaDAO());
+        daoMap.put("Valoración", new MahnValoracionSalaDAO());
+
+        entityClassMap.put("Museo", MahnMuseos.class);
+        entityClassMap.put("Sala", MahnSala.class);
+        entityClassMap.put("Colección", MahnColeccion.class);
+        entityClassMap.put("Especie", MahnEspecie.class);
+        entityClassMap.put("Visitante", MahnVisitante.class);
+        entityClassMap.put("Temática", MahnTematica.class);
+        entityClassMap.put("Precios", MahnPrecios.class);
+        entityClassMap.put("ComisiónTarjeta", MahnComisionTarjeta.class);
+        entityClassMap.put("Entrada", MahnEntrada.class);
+        entityClassMap.put("Valoración", MahnValoracionSala.class);
     }
 
-    @FXML private void onNew()    { /* abrir diálogo para crear */ }
-    @FXML private void onEdit()   { /* abrir diálogo con objeto seleccionado */ }
-    @FXML private void onDelete() {
-        Object sel = table.getSelectionModel().getSelectedItem();
-        if (sel == null) return;
-        // dependiendo del tipo, invocar su DAO .delete(...)
+    // Métodos para navegación del menú lateral
+    @FXML private void onMenuSala()           { loadEntity("Sala"); }
+    @FXML private void onMenuColeccion()      { loadEntity("Colección"); }
+    @FXML private void onMenuEspecie()        { loadEntity("Especie"); }
+    @FXML private void onMenuTematica()       { loadEntity("Temática"); }
+    @FXML private void onMenuPrecio()         { loadEntity("Precios"); }
+    @FXML private void onMenuComision()       { loadEntity("ComisiónTarjeta"); }
+    @FXML private void onMenuEntrada()        { loadEntity("Entrada"); }
+    @FXML private void onMenuValoracion()     { loadEntity("Valoración"); }
+    @FXML private void onMenuReporte()        { System.out.println("Ir a reportes (a implementar)."); }
+
+    private void loadEntity(String entityName) {
+        selectedEntity = entityName;
+        table.getItems().clear();
+        table.getColumns().clear();
+
+        GenericDAO<?, ?> dao = daoMap.get(selectedEntity);
+        Class<?> clazz = entityClassMap.get(selectedEntity);
+        if (dao == null || clazz == null) return;
+
+        List<?> data = dao.findAll();
+        setupColumns(clazz);
+        table.setItems(FXCollections.observableArrayList(data));
+    }
+
+    @FXML
+    private void onApplyFilters() {
+        String query = filterText.getText().toLowerCase();
+        if (query.isEmpty()) return;
+
+        ObservableList<Object> currentItems = table.getItems();
+        ObservableList<Object> filteredItems = FXCollections.observableArrayList();
+
+        for (Object item : currentItems) {
+            for (Method method : item.getClass().getDeclaredMethods()) {
+                if (method.getName().startsWith("get")) {
+                    try {
+                        Object value = method.invoke(item);
+                        if (value != null && value.toString().toLowerCase().contains(query)) {
+                            filteredItems.add(item);
+                            break;
+                        }
+                    } catch (Exception ignored) {}
+                }
+            }
+        }
+
+        table.setItems(filteredItems);
+    }
+
+    @FXML
+    private void onNew() {
+        if (selectedEntity == null) return;
+        DialogFactory.openInsertDialog(selectedEntity, null);
+        loadEntity(selectedEntity); // Refrescar
+    }
+
+    @FXML
+    private void onEdit() {
+        if (selectedEntity == null) return;
+        Object selected = table.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+        DialogFactory.openInsertDialog(selectedEntity, selected);
+        loadEntity(selectedEntity); // Refrescar
+    }
+
+    @FXML
+    private void onDelete() {
+        Object selected = table.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        GenericDAO<Object, ?> dao = (GenericDAO<Object, ?>) daoMap.get(selectedEntity);
+        dao.delete(selected);
+        table.getItems().remove(selected);
+    }
+
+   private <T> void setupColumns(Class<T> clazz) {
+    table.getColumns().clear();
+
+    for (Field field : clazz.getDeclaredFields()) {
+        String fieldName = field.getName();
+        Class<?> type = field.getType();
+
+        if (isSimpleType(type)) {
+            TableColumn<Object, Object> col = (TableColumn<Object, Object>) new TableColumn<>(capitalize(fieldName));
+            col.setCellValueFactory(new PropertyValueFactory<>(fieldName));
+            table.getColumns().add(col);
+        }
+    }
+}
+   
+   private boolean isSimpleType(Class<?> type) {
+    return type.isPrimitive()
+        || type == String.class
+        || type == Integer.class
+        || type == Long.class
+        || type == Double.class
+        || type == Float.class
+        || type == Boolean.class
+        || type == BigDecimal.class
+        || type == Date.class;
+}
+   private String capitalize(String str) {
+    return str.substring(0, 1).toUpperCase() + str.substring(1);
+}
+
+    private String decapitalize(String s) {
+        if (s == null || s.isEmpty()) return s;
+        return s.substring(0, 1).toLowerCase() + s.substring(1);
     }
 }
