@@ -2,27 +2,104 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="GUI.RatingController"
-      spacing="10">
-  <padding>
-    <Insets top="20" right="20" bottom="20" left="20"/>
-  </padding>
+      spacing="15"
+      style="-fx-background-color: #f5f5f5;"
+      alignment="TOP_CENTER">
 
-  <Label text="Valorar Sala" style="-fx-font-size: 18px;"/>
-  
-  <GridPane hgap="10" vgap="10">
-    <Label text="Sala:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-    <ComboBox fx:id="salaBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-    
-    <Label text="Estrellas (1–5):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-    <Spinner fx:id="starsSpinner" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-    
-    <Label text="Observación:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-    <TextArea fx:id="obsArea" prefRowCount="3" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-  </GridPane>
-  
-  <Button text="Enviar Valoración" onAction="#onSubmit"/>
-  <Label fx:id="statusLabel" style="-fx-font-size: 14px;"/>
+    <padding>
+        <Insets top="25" right="30" bottom="25" left="30"/>
+    </padding>
+
+    <Label text="Valoración de Sala" 
+           style="-fx-font-weight: bold; -fx-text-fill: #333333;">
+        <font>
+            <Font size="20.0"/>
+        </font>
+    </Label>
+
+    <GridPane hgap="15" vgap="15" 
+              style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8;">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" minWidth="100"/>
+            <ColumnConstraints halignment="LEFT" minWidth="200"/>
+            <ColumnConstraints halignment="LEFT" minWidth="220"/>
+        </columnConstraints>
+
+        <Label text="Sala:" 
+               style="-fx-font-weight: bold;"
+               GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="salaBox" 
+                  promptText="Seleccione una sala"
+                  style="-fx-font-size: 14px;"
+                  GridPane.rowIndex="0" GridPane.columnIndex="1"
+                  onAction="#onSalaSeleccionada"/>
+
+        <!-- Ficha pequeña de sala -->
+        <VBox fx:id="fichaSalaBox" 
+              style="-fx-background-color: #eeeeee; -fx-padding: 10; -fx-border-color: #cccccc; -fx-border-radius: 4; -fx-background-radius: 4;"
+              prefWidth="220" prefHeight="80"
+              GridPane.rowIndex="0" GridPane.columnIndex="2" GridPane.rowSpan="2" alignment="TOP_LEFT">
+            <Label fx:id="fichaSalaLabel" wrapText="true" style="-fx-font-size: 13px;"/>
+        </VBox>
+
+        <Label text="Valoración:" 
+               style="-fx-font-weight: bold;"
+               GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <HBox spacing="8" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                    <ToggleButton fx:id="star1" text="☆" style="-fx-font-size: 24px; -fx-text-fill: #FFD700; -fx-background-color: transparent;"/>
+                    <ToggleButton fx:id="star2" text="☆" style="-fx-font-size: 24px; -fx-text-fill: #FFD700; -fx-background-color: transparent;"/>
+                    <ToggleButton fx:id="star3" text="☆" style="-fx-font-size: 24px; -fx-text-fill: #FFD700; -fx-background-color: transparent;"/>
+                    <ToggleButton fx:id="star4" text="☆" style="-fx-font-size: 24px; -fx-text-fill: #FFD700; -fx-background-color: transparent;"/>
+                    <ToggleButton fx:id="star5" text="☆" style="-fx-font-size: 24px; -fx-text-fill: #FFD700; -fx-background-color: transparent;"/>
+                </HBox>
+        <!-- Spinner oculto para valor numérico de estrellas -->
+        <Spinner fx:id="starsSpinner" visible="false" managed="false"
+                 GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+        <Label text="Observaciones:" 
+               style="-fx-font-weight: bold;"
+               GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextArea fx:id="obsArea" 
+                  promptText="Escriba sus comentarios aquí..."
+                  style="-fx-font-size: 14px; -fx-padding: 8;"
+                  wrapText="true"
+                  prefRowCount="4"
+                  GridPane.rowIndex="2" GridPane.columnIndex="1" GridPane.columnSpan="2"/>
+
+        <Button text="Enviar Valoración" 
+                onAction="#onSubmit"
+                style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 8 20; -fx-background-radius: 4;"
+                defaultButton="true"
+                GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+        <Button fx:id="verValoracionesButton" text="Mostrar Valoraciones"
+                onAction="#onVerValoraciones"
+                style="-fx-font-size: 13px;"
+                GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+    </GridPane>
+
+    <!-- Panel de valoraciones, oculto inicialmente -->
+    <VBox fx:id="valoracionesBox" spacing="8" visible="false"
+          style="-fx-padding: 10; -fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;"
+          maxHeight="220" maxWidth="600" prefWidth="600" prefHeight="220">
+
+        <TableView fx:id="valoracionTable" prefHeight="160" style="-fx-font-size: 12px;">
+            <columns>
+                <TableColumn fx:id="salaCol" text="Sala" prefWidth="150"/>
+                <TableColumn fx:id="estrellasCol" text="Estrellas" prefWidth="80"/>
+                <TableColumn fx:id="obsCol" text="Observación" prefWidth="350"/>
+            </columns>
+        </TableView>
+
+        <Button fx:id="borrarValoracionButton" text="Eliminar Seleccionada"
+                onAction="#onBorrarValoracion"
+                style="-fx-font-size: 13px; -fx-background-radius: 4;"/>
+    </VBox>
+
+    <Label fx:id="statusLabel" 
+           style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
 </VBox>

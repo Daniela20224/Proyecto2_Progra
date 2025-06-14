@@ -24,12 +24,8 @@
             <Button text="Temáticas" onAction="#onMenuTematica" maxWidth="Infinity"/>
             <Button text="Precios" onAction="#onMenuPrecio" maxWidth="Infinity"/>
             <Button text="Comisiones" onAction="#onMenuComision" maxWidth="Infinity"/>
-
-<!--            <Separator/>-->
-<!--
-            <Button text="ENTRADAS" onAction="#onMenuEntrada" maxWidth="Infinity"/>
-            <Button text="VALORACIÓN" onAction="#onMenuValoracion" maxWidth="Infinity"/>
-            <Button text="REPORTES" onAction="#onMenuReporte" maxWidth="Infinity"/>-->
+             <Button text="Museos" onAction="#onMenuMuseos" maxWidth="Infinity"/>
+          
         </VBox>
     </left>
 
@@ -52,7 +48,8 @@
                 <Label text="Filtro 1:"/>
                 <TextField fx:id="filterText" promptText="Buscar..."/>
                 <Label text="Filtro 2:"/>
-                <ComboBox fx:id="advancedFilter" promptText="Seleccione"/>
+            <ComboBox fx:id="advancedFilter" promptText="Filtrar por campo específico"/>
+
                 <Button text="FILTRAR" onAction="#onApplyFilters"/>
             </HBox>
 

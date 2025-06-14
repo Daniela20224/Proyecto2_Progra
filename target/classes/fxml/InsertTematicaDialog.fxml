@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="GUI.InsertTematicaController">
+    <center>
+        <GridPane hgap="10" vgap="10"> 
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="nombreField" promptText="Nombre de la tematica" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Caracteristicas:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextArea fx:id="caracteristicasTematica" promptText="Descripción de la tematica" prefRowCount="4" wrapText="true"
+                      GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Epoca:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="epocaField" promptText="Epoca de la tematica" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Sala:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="salaCombo" promptText="Seleccione una sala" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        </GridPane>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Button text="Cancelar" onAction="#onCancel"/>
+            <Button text="Guardar" onAction="#onSave"/>
+        </HBox>
+    </bottom>
+</BorderPane>

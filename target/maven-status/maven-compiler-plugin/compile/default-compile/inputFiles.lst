@@ -18,14 +18,18 @@ C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\ja
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\GUI\InsertSalaController.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\models\MahnSala.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\GUI\InsertColeccionController.java
+C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\GUI\InsertPrecioController.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\com\mycompany\proyecto2_progra\App.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\dao\GenericDAOImpl.java
+C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\GUI\InsertEspecieController.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\models\MahnPrecios.java
+C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\GUI\InsertMuseoController.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\dao\MahnColeccionDAO.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\dao\MahnPreciosDAO.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\Services\ValidationService.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\GUI\MaintenanceController.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\GUI\TicketSaleController.java
+C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\GUI\InsertComisionController.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\dao\MahnAreasDAO.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\dao\MahnTematicaDAO.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\Services\PriceService.java
@@ -38,3 +42,4 @@ C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\ja
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\dao\MahnEntradaSalaDAO.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\models\MahnVisitante.java
 C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\dao\MahnEntradaDAO.java
+C:\Users\Alison Espinoza\Documents\NetBeansProjects\Proyecto2_Progra\src\main\java\GUI\InsertTematicaController.java

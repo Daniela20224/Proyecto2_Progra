@@ -10,11 +10,13 @@ dao\MahnValoracionSalaDAO.class
 models\MahnColeccion.class
 PriceService.class
 models\MahnEntrada.class
+GUI\InsertComisionController.class
 dao\MahnEntradaDAO.class
 Services\RatingService.class
 GUI\QRValidationController.class
 dao\JPAUtil.class
 com\mycompany\proyecto2_progra\ValidationService.class
+GUI\InsertEspecieController.class
 models\MahnAreas.class
 com\mycompany\proyecto2_progra\App.class
 models\MahnTematica.class
@@ -24,6 +26,7 @@ dao\MahnAreasDAO.class
 dao\MahnTematicaDAO.class
 models\MahnMuseos.class
 dao\MahnPreciosDAO.class
+GUI\InsertPrecioController.class
 models\MahnValoracionSala.class
 dao\GenericDAOImpl.class
 GUI\TicketSaleController.class
@@ -38,3 +41,5 @@ dao\MahnVisitanteDAO.class
 models\MahnEntradaSala.class
 models\MahnComisionTarjeta.class
 GUI\MaintenanceController.class
+GUI\InsertTematicaController.class
+GUI\InsertMuseoController.class

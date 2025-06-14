@@ -6,6 +6,9 @@ package models;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
@@ -13,6 +16,8 @@ import java.util.Date;
  */
 @javax.persistence.Entity
 @javax.persistence.Table(name = "MAHN_ESPECIE")
+
+@SequenceGenerator(name = "especies_seq", sequenceName = "SEQ_MAHN_ESPECIES", allocationSize = 1)
 @javax.persistence.NamedQueries({
     @javax.persistence.NamedQuery(name = "MahnEspecie.findAll", query = "SELECT m FROM MahnEspecie m"),
     @javax.persistence.NamedQuery(name = "MahnEspecie.findByIdEspecie", query = "SELECT m FROM MahnEspecie m WHERE m.idEspecie = :idEspecie"),
@@ -25,10 +30,10 @@ import java.util.Date;
     @javax.persistence.NamedQuery(name = "MahnEspecie.findByCaracteristicas", query = "SELECT m FROM MahnEspecie m WHERE m.caracteristicas = :caracteristicas")})
 public class MahnEspecie implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "especies_seq")
     @javax.persistence.Basic(optional = false)
     @javax.persistence.Column(name = "ID_ESPECIE")
     private Integer idEspecie;

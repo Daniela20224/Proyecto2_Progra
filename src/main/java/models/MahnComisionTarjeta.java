@@ -5,6 +5,9 @@
 package models;
 
 import java.io.Serializable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 
 /**
  *
@@ -12,6 +15,8 @@ import java.io.Serializable;
  */
 @javax.persistence.Entity
 @javax.persistence.Table(name = "MAHN_COMISION_TARJETA")
+
+@SequenceGenerator(name = "comision_tarjeta_seq", sequenceName = "SEQ_MAHN_COMISION_TARJETA", allocationSize = 1)
 @javax.persistence.NamedQueries({
     @javax.persistence.NamedQuery(name = "MahnComisionTarjeta.findAll", query = "SELECT m FROM MahnComisionTarjeta m"),
     @javax.persistence.NamedQuery(name = "MahnComisionTarjeta.findByIdComision", query = "SELECT m FROM MahnComisionTarjeta m WHERE m.idComision = :idComision"),
@@ -19,10 +24,9 @@ import java.io.Serializable;
     @javax.persistence.NamedQuery(name = "MahnComisionTarjeta.findByComision", query = "SELECT m FROM MahnComisionTarjeta m WHERE m.comision = :comision")})
 public class MahnComisionTarjeta implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comision_tarjeta_seq")
     @javax.persistence.Basic(optional = false)
     @javax.persistence.Column(name = "ID_COMISION")
     private Integer idComision;

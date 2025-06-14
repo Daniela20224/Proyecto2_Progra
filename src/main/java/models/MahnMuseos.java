@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,6 +26,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "MAHN_MUSEOS")
+
+@SequenceGenerator(name = "museos_seq", sequenceName = "SEQ_MAHN_MUSEOS", allocationSize = 1)
 @NamedQueries({
     @NamedQuery(name = "MahnMuseos.findAll", query = "SELECT m FROM MahnMuseos m"),
     @NamedQuery(name = "MahnMuseos.findByIdMuseo", query = "SELECT m FROM MahnMuseos m WHERE m.idMuseo = :idMuseo"),
@@ -36,10 +39,10 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "MahnMuseos.findBySitioWeb", query = "SELECT m FROM MahnMuseos m WHERE m.sitioWeb = :sitioWeb")})
 public class MahnMuseos implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+ 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "museos_seq")
     @Basic(optional = false)
     @Column(name = "ID_MUSEO")
     private BigDecimal idMuseo;

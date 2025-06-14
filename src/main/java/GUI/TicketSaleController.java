@@ -23,6 +23,7 @@ public class TicketSaleController {
     @FXML private Spinner<Integer> quantitySpinner;
     @FXML private Label totalLabel;
 
+    
     private final MahnPreciosDAO preciosDAO = new MahnPreciosDAO();
     private final MahnEntradaDAO entradaDAO = new MahnEntradaDAO();
     private final MahnComisionTarjetaDAO comDAO = new MahnComisionTarjetaDAO();

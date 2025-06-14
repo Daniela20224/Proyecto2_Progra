@@ -1,19 +1,67 @@
 /* app.css */
 
+/* Establecer la fuente principal */
 .root {
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
+/* Estilo para las pestañas */
 .tab-pane .tab-header-area {
-    -fx-background-color: #ECECEC;
+    -fx-background-color: transparent; /* Eliminar el fondo gris */
+    -fx-padding: 0;
 }
 
-.button {
-    -fx-background-color: #2C3E50;
-    -fx-text-fill: white;
+.tab-pane .tab {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 5 10;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: transparent;
+    -fx-text-fill: #9c27b0; /* Morado claro */
     -fx-font-weight: bold;
 }
 
+.tab-pane .tab-label {
+    -fx-font-size: 12px;
+    -fx-font-style: italic;
+    -fx-text-fill: #9c27b0; /* Morado claro */
+    -fx-padding: 5 10;
+}
+
+/* Estilo para los botones */
+.button {
+    -fx-background-color: #9c27b0; /* Morado claro */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-padding: 10 20;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.4), 5, 0, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: #7b1fa2; /* Morado más oscuro */
+}
+
+/* Estilo para las etiquetas */
 .label {
     -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-font-style: italic;
+}
+
+/* Estilo para los campos de texto */
+.text-field, .combo-box, .text-area {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #9c27b0; /* Morado claro */
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused, .combo-box:focused, .text-area:focused {
+    -fx-border-color: #7b1fa2; /* Morado más oscuro */
 }

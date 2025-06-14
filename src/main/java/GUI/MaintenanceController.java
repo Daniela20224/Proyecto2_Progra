@@ -35,36 +35,37 @@ public class MaintenanceController {
         // Inicializar DAO y clases
         daoMap.put("Museo", new MahnMuseosDAO());
         daoMap.put("Sala", new MahnSalaDAO());
-        daoMap.put("Colección", new MahnColeccionDAO());
+        daoMap.put("Coleccion", new MahnColeccionDAO());
         daoMap.put("Especie", new MahnEspecieDAO());
         daoMap.put("Visitante", new MahnVisitanteDAO());
-        daoMap.put("Temática", new MahnTematicaDAO());
+        daoMap.put("Tematica", new MahnTematicaDAO());
         daoMap.put("Precios", new MahnPreciosDAO());
-        daoMap.put("ComisiónTarjeta", new MahnComisionTarjetaDAO());
+        daoMap.put("ComisionTarjeta", new MahnComisionTarjetaDAO());
         daoMap.put("Entrada", new MahnEntradaDAO());
         daoMap.put("Valoración", new MahnValoracionSalaDAO());
 
         entityClassMap.put("Museo", MahnMuseos.class);
         entityClassMap.put("Sala", MahnSala.class);
-        entityClassMap.put("Colección", MahnColeccion.class);
+        entityClassMap.put("Coleccion", MahnColeccion.class);
         entityClassMap.put("Especie", MahnEspecie.class);
         entityClassMap.put("Visitante", MahnVisitante.class);
-        entityClassMap.put("Temática", MahnTematica.class);
+        entityClassMap.put("Tematica", MahnTematica.class);
         entityClassMap.put("Precios", MahnPrecios.class);
-        entityClassMap.put("ComisiónTarjeta", MahnComisionTarjeta.class);
+        entityClassMap.put("ComisionTarjeta", MahnComisionTarjeta.class);
         entityClassMap.put("Entrada", MahnEntrada.class);
-        entityClassMap.put("Valoración", MahnValoracionSala.class);
+        entityClassMap.put("Valoracion", MahnValoracionSala.class);
     }
 
     // Métodos para navegación del menú lateral
     @FXML private void onMenuSala()           { loadEntity("Sala"); }
-    @FXML private void onMenuColeccion()      { loadEntity("Colección"); }
+    @FXML private void onMenuMuseos()           { loadEntity("Museo"); }
+    @FXML private void onMenuColeccion()      { loadEntity("Coleccion"); }
     @FXML private void onMenuEspecie()        { loadEntity("Especie"); }
-    @FXML private void onMenuTematica()       { loadEntity("Temática"); }
+    @FXML private void onMenuTematica()       { loadEntity("Tematica"); }
     @FXML private void onMenuPrecio()         { loadEntity("Precios"); }
-    @FXML private void onMenuComision()       { loadEntity("ComisiónTarjeta"); }
+    @FXML private void onMenuComision()       { loadEntity("ComisionTarjeta"); }
     @FXML private void onMenuEntrada()        { loadEntity("Entrada"); }
-    @FXML private void onMenuValoracion()     { loadEntity("Valoración"); }
+    @FXML private void onMenuValoracion()     { loadEntity("Valoracion"); }
     @FXML private void onMenuReporte()        { System.out.println("Ir a reportes (a implementar)."); }
 
     private void loadEntity(String entityName) {
@@ -79,32 +80,67 @@ public class MaintenanceController {
         List<?> data = dao.findAll();
         setupColumns(clazz);
         table.setItems(FXCollections.observableArrayList(data));
+        
+        // Esto se asegura que el ComboBox tenga los nombres de los campos
+        
+        
+advancedFilter.getItems().clear();
+for (Field field : clazz.getDeclaredFields()) {
+    if (isSimpleType(field.getType())) {
+        advancedFilter.getItems().add(field.getName());
+    }
+    
+    advancedFilter.setValue(null); // Limpia la selección actual
+
+}
+
     }
 
-    @FXML
-    private void onApplyFilters() {
-        String query = filterText.getText().toLowerCase();
-        if (query.isEmpty()) return;
+   @FXML
+private void onApplyFilters() {
+    if (selectedEntity == null) return;
 
-        ObservableList<Object> currentItems = table.getItems();
-        ObservableList<Object> filteredItems = FXCollections.observableArrayList();
+    String query = filterText.getText().toLowerCase().trim();
+    String selectedField = advancedFilter.getValue(); // puede ser null
 
-        for (Object item : currentItems) {
-            for (Method method : item.getClass().getDeclaredMethods()) {
+    GenericDAO<?, ?> dao = daoMap.get(selectedEntity);
+    Class<?> clazz = entityClassMap.get(selectedEntity);
+    if (dao == null || clazz == null) return;
+
+    List<?> fullData = dao.findAll(); // cargar todos los datos frescos
+    ObservableList<Object> filtered = FXCollections.observableArrayList();
+
+    for (Object item : fullData) {
+        if (selectedField != null && !selectedField.isEmpty()) {
+            // Solo busca en el campo seleccionado
+            try {
+                Method getter = clazz.getMethod("get" + capitalize(selectedField));
+                Object value = getter.invoke(item);
+                if (value != null && value.toString().toLowerCase().contains(query)) {
+                    filtered.add(item);
+                }
+            } catch (Exception e) {
+                e.printStackTrace(); // Opcional: ver errores si el campo no existe
+            }
+        } else {
+            // Buscar en todos los campos
+            for (Method method : clazz.getDeclaredMethods()) {
                 if (method.getName().startsWith("get")) {
                     try {
                         Object value = method.invoke(item);
                         if (value != null && value.toString().toLowerCase().contains(query)) {
-                            filteredItems.add(item);
+                            filtered.add(item);
                             break;
                         }
                     } catch (Exception ignored) {}
                 }
             }
         }
-
-        table.setItems(filteredItems);
     }
+
+    table.setItems(filtered);
+}
+
 
     @FXML
     private void onNew() {
@@ -161,6 +197,7 @@ public class MaintenanceController {
    private String capitalize(String str) {
     return str.substring(0, 1).toUpperCase() + str.substring(1);
 }
+   
 
     private String decapitalize(String s) {
         if (s == null || s.isEmpty()) return s;

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="GUI.InsertEspecieController">
+    <center>
+        <GridPane hgap="10" vgap="10"> 
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Nombre Cientifico:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="nombreCientificoField" promptText="Nombre cientifico de la Especie" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Coleccion:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <ComboBox fx:id="coleccionCombo" promptText="Seleccione una coleccion" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Nombre Comun:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="nombreComunField" promptText="Nombre comun de la Especie" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            
+            <Label text="Fecha de extincion:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <DatePicker fx:id="fechaExtincionPicker" promptText="Seleccione la fecha" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Epoca:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <TextField fx:id="epocaField" promptText="Época de vida de la especie" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+            <Label text="Peso:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+            <TextField fx:id="pesoField" promptText="Peso de la especie" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+            <Label text="Tamano:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+            <TextField fx:id="TamanoField" promptText="Tamaño de la especie" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+            <Label text="Caracteristicas:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+            <TextArea fx:id="CaracteristicasEspecie" promptText="Características de la especie" prefRowCount="4" wrapText="true"
+                      GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+        </GridPane>
+    </center>
+
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Button text="Cancelar" onAction="#onCancel"/>
+            <Button text="Guardar" onAction="#onSave"/>
+        </HBox>
+    </bottom>
+</BorderPane>

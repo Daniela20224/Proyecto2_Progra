@@ -1,5 +1,6 @@
 package GUI;
 
+
 import dao.MahnMuseosDAO;
 import dao.MahnSalaDAO;
 import javafx.collections.FXCollections;
@@ -10,6 +11,8 @@ import models.MahnMuseos;
 import models.MahnSala;
 
 public class InsertSalaController {
+
+   
 
     @FXML private TextField nombreField;
     @FXML private TextArea descripcionArea;

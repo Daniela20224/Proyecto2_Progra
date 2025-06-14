@@ -27,27 +27,70 @@ public class DialogFactory {
                     stage.setTitle((toEdit == null ? "Insertar" : "Editar") + " Sala");
                     break;
 
-//                case "Colección":
-//                    loader = new FXMLLoader(DialogFactory.class.getResource("/GUI/InsertColeccionDialog.fxml"));
-//                    root = loader.load();
-//                    if (toEdit != null) {
-//                        InsertColeccionController c = loader.getController();
-//                        c.setColeccion((MahnColeccion) toEdit);
-//                    }
-//                    stage.setTitle((toEdit == null ? "Insertar" : "Editar") + " Colección");
-//                    break;
+                case "Museo":
+                    loader = new FXMLLoader(DialogFactory.class.getResource("/fxml/InsertMuseoDialog.fxml"));
+                    root = loader.load();
+                    if (toEdit != null) {
+                        InsertMuseoController c = loader.getController();
+                        c.setMuseo((MahnMuseos) toEdit);
+                    }
+                    stage.setTitle((toEdit == null ? "Insertar" : "Editar") + " Museo");
+                    break;
 
-//                case "Especie":
-//                    loader = new FXMLLoader(DialogFactory.class.getResource("/GUI/InsertEspecieDialog.fxml"));
-//                    root = loader.load();
-//                    if (toEdit != null) {
-//                        InsertEspecieController c = loader.getController();
-//                        c.setEspecie((MahnEspecie) toEdit);
-//                    }
-//                    stage.setTitle((toEdit == null ? "Insertar" : "Editar") + " Especie");
-//                    break;
+                case "Coleccion":
+                    loader = new FXMLLoader(DialogFactory.class.getResource("/fxml/InsertColeccionDialog.fxml"));
+                    root = loader.load();
+                    if (toEdit != null) {
+                        InsertColeccionController c = loader.getController();
+                        c.setColeccion((MahnColeccion) toEdit);
+                    }
+                    stage.setTitle((toEdit == null ? "Insertar" : "Editar") + " Museo");
+                    break;
 
-                // Puedes seguir con "Temática", "Precio", etc.
+                case "Especie":
+                    loader = new FXMLLoader(DialogFactory.class.getResource("/GUI/InsertEspecieDialog.fxml"));
+                    root = loader.load();
+                    if (toEdit != null) {
+                        InsertEspecieController c = loader.getController();
+                        c.setEspecie((MahnEspecie) toEdit);
+                    }
+                    stage.setTitle((toEdit == null ? "Insertar" : "Editar") + " Especie");
+                    break;
+                
+                    
+                     case "Tematica":
+                    loader = new FXMLLoader(DialogFactory.class.getResource("/fxml/InsertTematicaDialog.fxml"));
+                    root = loader.load();
+                    if (toEdit != null) {
+                        InsertTematicaController c = loader.getController();
+                        c.setTematica((MahnTematica) toEdit);
+                    }
+                    stage.setTitle((toEdit == null ? "Insertar" : "Editar") + " Museo");
+                    break;
+                    
+                    
+                     case "Precios":
+                    loader = new FXMLLoader(DialogFactory.class.getResource("/fxml/InsertPrecioDialog.fxml"));
+                    root = loader.load();
+                    if (toEdit != null) {
+                        InsertPrecioController c = loader.getController();
+                        c.setPrecios((MahnPrecios) toEdit);
+                    }
+                    stage.setTitle((toEdit == null ? "Insertar" : "Editar") + " Museo");
+                    break;
+                    
+                    
+                     case "ComisionTarjeta":
+                    loader = new FXMLLoader(DialogFactory.class.getResource("/fxml/InsertComisionDialog.fxml"));
+                    root = loader.load();
+                    if (toEdit != null) {
+                        InsertComisionController c = loader.getController();
+                        c.setComision((MahnComisionTarjeta) toEdit);
+                    }
+                    stage.setTitle((toEdit == null ? "Insertar" : "Editar") + " Museo");
+                    break;
+                    
+
                 default:
                     throw new IllegalArgumentException("Entidad no reconocida: " + entityName);
             }

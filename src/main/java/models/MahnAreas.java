@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -22,16 +23,17 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "MAHN_AREAS")
+
+@SequenceGenerator(name = "areas_seq", sequenceName = "SEQ_MAHN_AREAS", allocationSize = 1)
 @NamedQueries({
     @NamedQuery(name = "MahnAreas.findAll", query = "SELECT m FROM MahnAreas m"),
     @NamedQuery(name = "MahnAreas.findByIdArea", query = "SELECT m FROM MahnAreas m WHERE m.idArea = :idArea"),
     @NamedQuery(name = "MahnAreas.findByNombre", query = "SELECT m FROM MahnAreas m WHERE m.nombre = :nombre")})
 public class MahnAreas implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "areas_seq")
     @Basic(optional = false)
     @Column(name = "ID_AREA")
     private BigDecimal idArea;
